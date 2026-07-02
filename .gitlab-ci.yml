@@ -1,0 +1,16 @@
+image: eclipse-temurin:25-jdk
+
+stages:
+  - build
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+build:
+  stage: build
+  script:
+    - chmod +x ./gradlew
+    - ./gradlew clean build --no-daemon -x test
